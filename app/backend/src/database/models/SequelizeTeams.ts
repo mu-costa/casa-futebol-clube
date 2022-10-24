@@ -1,7 +1,10 @@
 import { Model, DataTypes } from 'sequelize';
 import database from '.';
 
-class Teams extends Model {}
+class Teams extends Model {
+  id!: number;
+  teamName: string;
+}
 
 Teams.init({
   id: {
