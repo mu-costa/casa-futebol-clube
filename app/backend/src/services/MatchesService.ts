@@ -13,4 +13,17 @@ export default class userService {
     ] });
     return data;
   };
+
+  public getInProgress = async (bool: boolean) => {
+    const data = await MatchesModel.findAll({ where: { inProgress: bool },
+      include: [
+        {
+          model: TeamsModel, as: 'teamHome', attributes: { exclude: ['id'] },
+        },
+        {
+          model: TeamsModel, as: 'teamAway', attributes: { exclude: ['id'] },
+        },
+      ] });
+    return data;
+  };
 }
