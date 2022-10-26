@@ -6,5 +6,7 @@ const matchesController = new MatchesController();
 const matchesRouter = Router();
 
 matchesRouter.get('/matches', matchesController.getMatches);
-matchesRouter.get('/matches', matchesController.inProgressMatches);
+matchesRouter.get('/matches', matchesController.inProgressMatchesFalse);
+matchesRouter.get('/matches', matchesController.inProgressMatchesTrue);
+
 export default matchesRouter;

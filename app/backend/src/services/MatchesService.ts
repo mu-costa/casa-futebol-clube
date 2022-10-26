@@ -15,7 +15,7 @@ export default class userService {
   };
 
   public getInProgress = async (bool: boolean) => {
-    const data = await MatchesModel.findAll({ where: { inProgress: bool },
+    const data = await MatchesModel.findAll({ where: { inProgress: Boolean(bool) },
       include: [
         {
           model: TeamsModel, as: 'teamHome', attributes: { exclude: ['id'] },
