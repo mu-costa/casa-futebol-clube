@@ -1,7 +1,9 @@
 import * as jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import CreateError from './CreateError';
 
-type jwtPayLoad = string | undefined | jwt.JwtPayload ;
+type jwtPayLoad = string | jwt.JwtPayload | jwt.VerifyErrors | void;
+type jwtSecret = jwt.Secret | void;
 
 const secret = process.env.JWT_SECRET || ('secret' as jwt.Secret);
 
@@ -10,8 +12,14 @@ interface role {
 }
 
 interface dataJwt {
-  data: role;
+  data?: role;
+  message?: string;
 }
+
+const errFunction = (err: unknown, decoded: unknown) : unknown => {
+  if (err) throw new CreateError('Unauthorized', 'Token must be a valid token');
+  return decoded;
+};
 
 export default class TokeManager {
   static makeToken = (payload: unknown) => {
@@ -25,9 +33,9 @@ export default class TokeManager {
   };
 
   static validateToken = (token: string | undefined) => {
-    const jwtSecret: jwtPayLoad = process.env.JWT_SECRET;
+    const jwtSecret: jwtSecret = process.env.JWT_SECRET;
     let validToken : jwtPayLoad = '';
-    if (jwtSecret && token) validToken = jwt.verify(token, jwtSecret);
+    if (jwtSecret && token) validToken = jwt.verify(token, jwtSecret, errFunction);
     return validToken as dataJwt;
   };
 }

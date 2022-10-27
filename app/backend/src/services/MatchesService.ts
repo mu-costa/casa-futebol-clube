@@ -1,7 +1,15 @@
 import MatchesModel from '../database/models/SequelizeMatches';
 import TeamsModel from '../database/models/SequelizeTeams';
 
-export default class userService {
+interface match {
+  homeTeam: number;
+  awayTeam: number;
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+  inProgress: boolean;
+}
+
+export default class matchesService {
   public getMatches = async () => {
     const data = await MatchesModel.findAll({ include: [
       {
@@ -24,6 +32,24 @@ export default class userService {
           model: TeamsModel, as: 'teamAway', attributes: { exclude: ['id'] },
         },
       ] });
+    return data;
+  };
+
+  public createMatch = async ({ homeTeam,
+    awayTeam,
+    homeTeamGoals,
+    awayTeamGoals, inProgress } : match) => {
+    const data = await MatchesModel.create({ homeTeam,
+      awayTeam,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress });
+    return data;
+  };
+
+  public updateMatch = async (id: number) => {
+    const data = await MatchesModel.update({ inProgress: false }, {
+      where: { id } });
     return data;
   };
 }

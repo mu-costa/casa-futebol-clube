@@ -19,7 +19,7 @@ export default class UserController {
     const { authorization } = req.headers;
     const verifyToken = TokeManager.validateToken(authorization);
     const { data } = verifyToken;
-    const { role } = data;
+    const role = data?.role;
     res.status(200).json({ role });
   };
 
