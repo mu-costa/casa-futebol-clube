@@ -52,4 +52,11 @@ export default class matchesService {
       where: { id } });
     return data;
   };
+
+  public updateInProgress = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+    const data = await MatchesModel.update({ homeTeamGoals, awayTeamGoals }, {
+      where: { id } });
+
+    return data;
+  };
 }
