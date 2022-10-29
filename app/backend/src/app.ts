@@ -4,6 +4,7 @@ import handleErrors from './middlewares/handleErrors';
 import usersRouter from './routes/users.routes';
 import teamsRouter from './routes/teams.routes';
 import matchesRouter from './routes/matches.routes';
+import leaderboardRoutes from './routes/leaderboard.routes';
 
 class App {
   public app: express.Express;
@@ -18,6 +19,7 @@ class App {
     this.app.use(usersRouter);
     this.app.use(teamsRouter);
     this.app.use(matchesRouter);
+    this.app.use(leaderboardRoutes);
     this.app.use(handleErrors);
   }
 
