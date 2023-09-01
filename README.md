@@ -1,9 +1,7 @@
-# Trybe Futebol Clube
+# Casa Futebol Clube
 
 ## About
-Project developed at Back-End Development Module of Trybe's Web Development course. It was approved with 100% of the mandatory and optional requirements met.
-
-The goal was to develop a RESTful API following SOLID principles, and its integration tests for a front-end application that was already developed.
+The goal is develop a RESTful API following SOLID principles, and its integration tests for a front-end application that was already developed.
 
 The application is used to check matches's data and the leaderboard of a soccer competition, to register and update matches. 
 The authentication is handled with JSON Web Tokens, and the password encryption is handled with _bcryptjs_. 
